@@ -1,2 +1,3 @@
 input_img_fname,target_img_fname
 0_brightfield.jpg,0_fluorescence.jpg
+1_brightfield.jpg,1_fluorescence.jpg
