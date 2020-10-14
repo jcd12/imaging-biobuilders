@@ -1,4 +1,4 @@
-data/
+data/fft/
 processed_data/
 .ipynb_checkpoints/
 .Rproj.user
