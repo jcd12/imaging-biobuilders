@@ -16,6 +16,9 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
+# In[2]:
+
+
 parser = argparse.ArgumentParser(description='Processes a set of fluorescent or segmented images of mycelia and extracts relevant features.')
 
 parser.add_argument('--img_folder', dest="img_folder", type=str, required=True,
@@ -37,10 +40,13 @@ parser.add_argument('--small_object_limit_skeleton', dest="small_object_limit_sk
                     help='minimum size of connected binary pixels to keep when preprocessing binary, skeletonized image. larger values remove more noise')
 parser.add_argument('--median_filter_kernel', dest="median_filter_kernel", type=int, required=False, default=5,
                     help='size of median filter kernel used in smoothing edges of mycelia during preprocessing.')
+parser.add_argument('--genotype', dest="genotype", type=str, required=False, default="all",
+                    help="""only use images connected to a specific genotype, as per the gene column in the image csv. "all" includes all images.""")
 
 
 args = parser.parse_args()
-#args = parser.parse_args(["--img_folder", "data/", "--overview_file", "image_overview.csv", "--fluorescence_dim", "2", "--hours", "24"])
+#args = parser.parse_args(["--img_folder", "data/", "--overview_file", "image_overview.csv", "--fluorescence_dim", "2", "--hours", "24", "--genotype", "wt"])
+
 
 
 
@@ -52,6 +58,9 @@ small_object_limit = args.small_object_limit
 small_object_limit_skeleton = args.small_object_limit_skeleton
 median_filter_kernel = args.median_filter_kernel
 fluorescence_dim = args.fluorescence_dim
+
+genotype = args.genotype
+
 
 
 
@@ -234,7 +243,12 @@ def get_dist_params(measure, data):
 
 
 
+
 img_overview = pd.read_csv(img_folder+overview_file)
+
+if genotype is not "all":
+    img_overview = img_overview.loc[(img_overview["gene"] == genotype)]
+
 
 
 
@@ -287,9 +301,11 @@ for idx in range(len(img_overview)):
 
 
 
+
 branching_freq_avg = np.mean(branching_freqs)
 curvature_params = get_dist_params("curvature", [item for sublist in curvatures_all for item in sublist]) #gamma dist, params scale
 angle_params = get_dist_params("branching", [item for sublist in angles_all for item in sublist]) #beta dist, params a, b
+
 
 
 
@@ -298,6 +314,7 @@ export_df = pd.DataFrame([["branching_frequency", "curvature_gamma_a", "curvatur
                           [branching_freq_avg] + list(curvature_params) + list(angle_params)])
 
 export_df = export_df.rename(columns=export_df.iloc[0]).drop(export_df.index[0])
+
 
 
 
