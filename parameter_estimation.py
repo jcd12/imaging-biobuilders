@@ -246,7 +246,7 @@ def get_dist_params(measure, data):
 
 img_overview = pd.read_csv(img_folder+overview_file)
 
-if genotype is not "all":
+if genotype != "all":
     img_overview = img_overview.loc[(img_overview["gene"] == genotype)]
 
 

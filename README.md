@@ -25,4 +25,4 @@ In order to run our code, you need a working python environment.
 1. If not already done, install Python and required packages using the steps above. 
 2. Navigate to the repository on your computer. 
 3. Activate environment using `activate env_name`
-4. Run the following command `python parameter_estimation_script.py --img_folder data/ --overview_file image_overview.csv --hours 24 --fluorescence_dim 2`
+4. Run the following command `python parameter_estimation.py --img_folder data/ --overview_file image_overview.csv --hours 24 --fluorescence_dim 2 --genotype wt`
