@@ -229,14 +229,18 @@ def box_fractal_dim(Z, threshold=0.9):
     coeffs = np.polyfit(np.log(sizes), np.log(counts), 1)
     return -coeffs[0]
 
-def get_dist_params(measure, data):
+def get_dist_params(measure, data, angle_max=40):
     if measure == "curvature":
         dist_name = "gamma"
         dist = getattr(stats, dist_name)
-        p = dist.fit(data)[0:2] #a, scale in scipy
+        max_curv = max(data)
+        data = [angle_max*i/max_curv for i in data]
+        fit = dist.fit(data)
+        p = [fit[0], fit[2]] #a, scale in scipy
     elif measure == "branching":
         dist_name = "beta"
-        data = [i/max(data) for i in data]
+        max_angle = max(data)
+        data = [i/max_angle for i in data]
         dist = getattr(stats, dist_name)
         p = dist.fit(data)[0:2] #a, b in scipy
     return p
@@ -247,7 +251,7 @@ def get_dist_params(measure, data):
 img_overview = pd.read_csv(img_folder+overview_file)
 
 if genotype != "all":
-    img_overview = img_overview.loc[(img_overview["gene"] == genotype)]
+    img_overview = img_overview.loc[(img_overview["gene"] == genotype)].reset_index(drop=True)
 
 
 
