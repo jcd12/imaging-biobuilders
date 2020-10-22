@@ -17,7 +17,7 @@ img_index,input_img_fname,target_img_fname,binary_threshold,segmentation_fname,g
 17,16_brightfield_double.jpg,16_fluorescence_double.jpg,15,16_target.jpg,spaa_chsc
 18,17a_brightfield_double.png,17a_fluorescence_double.png,30,17a_target.jpg,spaa_chsc
 19,17b_brightfield_double.png,17b_fluorescence_double.png,30,17b_target.jpg,spaa_chsc
-20,19_brightfield_mcb.png,19_fluorescence_mcb.png,15,19_target.jpg,mcb
+20,19_brightfield_pkar.png,19_fluorescence_pkar.png,15,19_target.jpg,pkar
 21,20_brightfield_double2.png,20_fluorescence_double2.png,15,20_target.jpg,spaa_gul1
 22,21_brightfield_chsc_gul1.jpg,21_fluorescence_chsc_gul1.jpg,15,21_target.jpg,chsc_gul1
 23,22_brightfield_chsc_gul1.jpg,22_fluorescence_chsc_gul1.jpg,15,22_target.jpg,chsc_gul1
