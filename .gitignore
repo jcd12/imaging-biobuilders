@@ -1,6 +1,7 @@
 data/fft/
 processed_data/
 figs/
+output/
 .ipynb_checkpoints/
 .Rproj.user
 .Rhistory
